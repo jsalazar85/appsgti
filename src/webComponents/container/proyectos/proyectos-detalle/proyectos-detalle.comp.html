@@ -1,0 +1,224 @@
+<form name="proyectoDetalleForm" novalidate ng-submit="$ctrl.clickGuardar()" layout="column" layout-fill>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <span class="md-truncate" style="position: absolute; top: 13px; bottom: 13px;">PROYECTO - ({{$ctrl.form.modo}})</span>
+            <span flex></span>
+            <md-button class="md-raised" aria-label="Learn More" type="submit">
+                GUARDAR
+            </md-button>
+            <md-button class="md-raised" aria-label="Learn More" ng-disabled="$ctrl.forma.disables['btnCerrar']" ng-click="$ctrl.clickSalir()">
+                SALIR
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-content layout-padding>
+        <div>
+            <form>
+                <!-- INFORMACION GENERAL -------------------------------->
+                <md-toolbar>
+                    <div class="md-toolbar-tools">
+                        <span>Información General</span>
+                    </div>
+                </md-toolbar>
+
+                <div layout-gt-xs="row">
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>FOLIO CII</label>
+                        <input ng-model="$ctrl.vm.m.p.txFolioCii">
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>FECHA SOLICITUD</label>
+                        <md-datepicker ng-model="$ctrl.vm.m.p.fhSolicitud"></md-datepicker>
+                    </md-input-container>
+                </div>
+                <div layout-gt-sm="row">
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>FOLIO SOLICITUD O DCS</label>
+                        <input ng-model="$ctrl.vm.m.p.txFolioDcs">
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>FOLIO JIRA</label>
+                        <input ng-model="$ctrl.vm.m.p.txFolioJira">
+                    </md-input-container>
+                </div>
+                <div layout-gt-xs="row">
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>INICIATIVA O PROYECTO</label>
+                        <input ng-model="$ctrl.vm.m.p.txNmbrProy">
+                    </md-input-container>
+                </div>
+
+                <div layout-gt-xs="row">
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>NOMBRE CORTO</label>
+                        <input ng-model="$ctrl.vm.m.p.txNmbrProyCrto">
+                    </md-input-container>
+                </div>
+
+                <div layout-gt-xs="row">
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>TIPO DE PROYECTO</label>
+                        <md-select ng-model="$ctrl.vm.selTipoProyecto" required>
+                            <md-option ng-repeat="s in $ctrl.vm.lstTipoProyecto" ng-value="s">
+                                {{s.txTipoProyecto}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+
+                <div layout-gt-xs="row">
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>ESTATUS</label>
+                        <md-select ng-model="$ctrl.vm.selEstatus" required>
+                            <md-option ng-repeat="s in $ctrl.vm.lstEstatus" ng-value="s">
+                                {{s.txEstatus}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+
+                <!-- PLANEACION ------------------------------------------>
+                <md-toolbar>
+                    <div class="md-toolbar-tools">
+                        <span>Planeación</span>
+                    </div>
+                </md-toolbar>
+                <div layout-gt-xs="row">
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>FECHA INICIO</label>
+                        <md-datepicker ng-model="$ctrl.vm.m.pf.fhInicio"></md-datepicker>
+                    </md-input-container>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>FECHA FIN</label>
+                        <md-datepicker ng-model="$ctrl.vm.m.pf.fhFin"
+                                       md-min-date="$ctrl.vm.m.pf.fhInicio"
+                        >
+                        </md-datepicker>
+                    </md-input-container>
+                </div>
+                <div layout-gt-xs="row">
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>FECHA ESTIMADA DE FIN</label>
+                        <md-datepicker ng-model="$ctrl.vm.m.pf.fhFinEstimado"></md-datepicker>
+                    </md-input-container>
+                </div>
+
+
+                <!-- AREA SOLICITANTE------------------------------------------>
+                <md-toolbar>
+                    <div class="md-toolbar-tools">
+                        <span>AREA SOLICITANTE</span>
+                    </div>
+                </md-toolbar>
+                <div layout-gt-xs="row">
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>SUBDIRECCION</label>
+                        <md-select ng-model="$ctrl.vm.selSubdirSolicitante" required ng-change="$ctrl.onChangeSubdirSolicitante()">
+                            <md-option ng-repeat="s in $ctrl.vm.lstSubdir" ng-value="s">
+                                {{s.txSubdirabbr + " " + s.txSubdireccion}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+
+                <div layout-gt-xs="row">
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>AREA</label>
+                        <md-select ng-model="$ctrl.vm.selAreaSolicitante" required>
+                            <md-option ng-repeat="s in $ctrl.vm.lstAreaSolicitante" ng-value="s">
+                                {{s.txArea}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+
+                <!-- AREA RESPONSABLE------------------------------------------>
+                <md-toolbar>
+                    <div class="md-toolbar-tools">
+                        <span>AREA RESPONSABLE</span>
+                    </div>
+                </md-toolbar>
+
+                <div layout-gt-xs="row">
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>SUBDIRECCION</label>
+                        <md-select ng-model="$ctrl.vm.selSubdirResponsable" required ng-change="$ctrl.onChangeSubdirResponsable()">
+                            <md-option ng-repeat="s in $ctrl.vm.lstSubdir" ng-value="s">
+                                {{s.txSubdirabbr + " " + s.txSubdireccion}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+
+                <div layout-gt-xs="row">
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>AREA</label>
+                        <md-select ng-model="$ctrl.vm.selAreaResponsable" required>
+                            <md-option ng-repeat="s in $ctrl.vm.lstAreaResponsable" ng-value="s">
+                                {{s.txArea}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+
+                <!-- ETAPAS ------------------------------------------>
+                <md-toolbar style="margin-bottom: 0 !important;">
+                    <div class="md-toolbar-tools">
+                        <span>ETAPAS</span>
+                        <md-button class="md-raised" aria-label="Learn More" ng-click="$ctrl.clickAgregarEtapa($event)">
+                            AÑADIR
+                        </md-button>
+                    </div>
+                </md-toolbar>
+                <div ui-grid="$ctrl.vm.gridEtapas" class="grid"></div>
+
+                <!-- INVOLUCRADOS ------------------------------------------>
+                <md-toolbar style="margin-bottom: 0 !important; margin-top: 10px;">
+                    <div class="md-toolbar-tools">
+                        <span>INVOLUCRADOS</span>
+                        <md-button class="md-raised" aria-label="Learn More" ng-click="$ctrl.clickAgregarInvl($event)">
+                            AÑADIR
+                        </md-button>
+                    </div>
+                </md-toolbar>
+                <div ui-grid="$ctrl.vm.gridInvl" class="grid"></div>
+            </form>
+        </div>
+    </md-content>
+    <!-- DIALOGOS ------------------------------------------>
+    <div style="visibility: hidden">
+        <div class="md-dialog-container" id="etapaProyectoCompDlg">
+            <md-dialog>
+                <etapas-proyecto-comp
+                        proyecto="$ctrl.vm"
+                        etapa="$ctrl.selectedEtapa"
+                        cat-etapas="$ctrl.vm.m.e"
+                        on-guardar="$ctrl.modalEtapaAgregar(data)"
+                        on-cerrar="$ctrl.modalEtapaCerrar(data)"
+                        tx-modo="$ctrl.vm.modalEtapaAccion"
+                >
+                </etapas-proyecto-comp>
+            </md-dialog>
+        </div>
+    </div>
+    <div style="visibility: hidden">
+        <div class="md-dialog-container" id="involucradoProyectoCompDlg">
+            <md-dialog>
+                <involucrados-proyecto-comp
+                        cat-tipo-inv="$ctrl.vm.m.invl"
+                        on-guardar="$ctrl.onModalAgregarInvl(data)"
+                        on-cerrar="$ctrl.modalEtapaCerrar(data)"
+                        tx-modo="$ctrl.vm.modalInvolucradosAccion"
+                        lst-involucrados="$ctrl.vm.gridInvl.data"
+
+                >
+                </involucrados-proyecto-comp>
+            </md-dialog>
+        </div>
+    </div>
+</form>
+
+
+

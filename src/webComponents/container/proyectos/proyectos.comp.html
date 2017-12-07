@@ -1,0 +1,20 @@
+<style>
+    .grid{
+        height: 97%;
+        width: 99%;
+    }
+</style>
+<div layout="column" layout-fill>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <md-truncate style="position: absolute; top: 13px; bottom: 13px;">Proyectos</md-truncate>
+            <span flex></span>
+            <md-button class="md-raised" aria-label="Learn More">
+                Nuevo
+            </md-button>
+        </div>
+    </md-toolbar>
+    <div flex=" layout-fill" style="overflow: scroll;">
+       <div ui-grid="gridOptions1" class="grid"></div>
+    </div>
+</div>

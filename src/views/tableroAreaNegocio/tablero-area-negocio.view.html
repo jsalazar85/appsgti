@@ -1,0 +1,133 @@
+<div class="container-fluid h-100 w-100" style="overflow: scroll;">
+    <div class="row no-gutters m-1 border align-items-center" style="height: 50px;background-color:white;">
+        <div class="col app-font-title pl-2 no-spaces" style="background-color:white;">
+            <span>Área de Negocio - {{txAreaNegocio}}</span>
+        </div>
+    </div>
+    <div class="row m-0 p-0" style="">
+        <div class="col-6 p-1 m-0">
+            <info-bit-cont
+                    title="info.servidores.title"
+                    nu-data="info.servidores.data"
+                    tx-format="#,##0"
+                    class-icon="info.servidores.classInfo">
+            </info-bit-cont>
+        </div>
+        <div class="col-6 p-1 m-0">
+            <info-bit-cont
+                    title="info.cpu.title"
+                    nu-data="info.cpu.data"
+                    tx-format="#,##0.0 %"
+                    class-icon="info.cpu.classInfo">
+            </info-bit-cont>
+        </div>
+        <div class="col-6 p-1 m-0">
+            <info-bit-cont
+                    title="info.memoria.title"
+                    nu-data="info.memoria.data"
+                    tx-format="#,##0.0 %"
+                    class-icon="info.memoria.classInfo">
+            </info-bit-cont>
+        </div>
+        <div class="col-6 p-1 m-0">
+            <info-bit-cont
+                    title="info.disco.title"
+                    nu-data="info.disco.data"
+                    tx-format="#,##0.0 %"
+                    class-icon="info.disco.classInfo">
+            </info-bit-cont>
+        </div>
+    </div>
+    <div class="row w-100" style="height: 72%;">
+        <div class="col-4 p-1 h-100">
+            <light-chart-container
+                    str-title="Top % Uso de CPU Promedio"
+                    str-footer="">
+                <chart>
+                    <am-chart-vertical-bar
+                            id="servidoresPorArea01"
+                            json-chart-path="json/porAreaNegocio/servidorCPU.json"
+                            set-on-top="true"
+                            maximize-attr="nuPromedio"
+                            max-attr="nuMaxCPU"
+                            max-attr-format="#,##0.0"
+                            max-graph-id="AmGraph-2"
+                            lst-ob-conditions="area.filters"
+                            service-cnf="{
+                            idTab:1001,
+                            idGra:201,
+                            idQry:1
+                        }">
+                    </am-chart-vertical-bar>
+                </chart>
+            </light-chart-container>
+        </div>
+        <div class="col-4 p-1 h-100">
+            <light-chart-container
+                    str-title="Top % Uso de Memoria Promedio"
+                    str-footer="">
+                <chart>
+                    <am-chart-vertical-bar
+                            id="servidoresPorArea02"
+                            json-chart-path="json/porAreaNegocio/servidorCPU.json"
+                            set-on-top="true"
+                            maximize-attr="nuPromedio"
+                            max-attr="nuMaxCPU"
+                            max-attr-format="#,##0.0"
+                            max-graph-id="AmGraph-2"
+                            lst-ob-conditions="area.filters"
+                            service-cnf="{
+                            idTab:1001,
+                            idGra:202,
+                            idQry:1
+                        }">
+                    </am-chart-vertical-bar>
+                </chart>
+            </light-chart-container>
+        </div>
+        <div class="col-4 p-1 h-100">
+            <light-chart-container
+                    str-title="Top % Uso de Disco Promedio"
+                    str-footer="">
+                <chart>
+                    <am-chart-vertical-bar
+                            id="servidoresPorArea03"
+                            json-chart-path="json/porAreaNegocio/servidorCPU.json"
+                            set-on-top="true"
+                            maximize-attr="nuPromedio"
+                            max-attr="nuMaxCPU"
+                            max-attr-format="#,##0.0"
+                            max-graph-id="AmGraph-2"
+                            lst-ob-conditions="area.filters"
+                            service-cnf="{
+                            idTab:1001,
+                            idGra:203,
+                            idQry:1
+                        }">
+                    </am-chart-vertical-bar>
+                </chart>
+            </light-chart-container>
+        </div>
+    </div>
+</div>
+
+<!--
+<div class="row w-100" style="height: 40%;">
+    <div class="col-11 p-3 h-100">
+        <light-chart-container>
+            <chart>
+                <am-chart
+                        style="height: 100%;"
+                        id="area1"
+                        json-chart-path="json/resumen/areaResumenAcumulado.json"
+                        mock-data="areaAcumulado"
+                        service-cnf="{
+                            idTab:2,
+                            idGra:10,
+                            idQry:1
+                        }">
+                </am-chart>
+            </chart>
+        </light-chart-container>
+    </div>
+</div>-->

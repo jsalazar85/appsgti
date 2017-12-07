@@ -1,0 +1,68 @@
+<style>
+    .hint {
+        /* Position the hint */
+        position: absolute;
+        left: 2px;
+        right: auto;
+        bottom: 7px;
+        /* Copy styles from ng-messages */
+        font-size: 12px;
+        line-height: 14px;
+        transition: all 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
+        /* Set our own color */
+        color: grey; }
+    .inputdemoErrorsAdvanced {
+        /* NOTE: Check the demo's HTML to see some additional RTL support CSS */
+        /* Setup animations similar to the ng-messages */ }
+    .inputdemoErrorsAdvanced .hint {
+        /* Position the hint */
+        position: absolute;
+        left: 2px;
+        right: auto;
+        bottom: 7px;
+        /* Copy styles from ng-messages */
+        font-size: 12px;
+        line-height: 14px;
+        transition: all 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
+        /* Set our own color */
+        color: grey; }
+    .inputdemoErrorsAdvanced .hint.ng-hide,
+    .inputdemoErrorsAdvanced .hint.ng-enter,
+    .inputdemoErrorsAdvanced .hint.ng-leave.ng-leave-active {
+        bottom: 26px;
+        opacity: 0; }
+    .inputdemoErrorsAdvanced .hint.ng-leave,
+    .inputdemoErrorsAdvanced .hint.ng-enter.ng-enter-active {
+        bottom: 7px;
+        opacity: 1; }
+
+</style>
+<!--<div layout="column" layout-fill>-->
+<form name="catEtapasDetalleForm" novalidate ng-submit="$ctrl.clickGuardar()" layout="column" layout-fill>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <span class="md-truncate" style="position: absolute; top: 13px; bottom: 13px;">ETAPAS - ({{$ctrl.form.modo}})</span>
+            <span flex></span>
+            <md-button class="md-raised" aria-label="Learn More" type="submit">
+                GUARDAR
+            </md-button>
+            <md-button class="md-raised" aria-label="Learn More" ng-disabled="$ctrl.forma.disables['btnCerrar']" ng-click="$ctrl.clickSalir()">
+                SALIR
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-content layout-padding style="margin-top: 10px;">
+        <md-input-container class="md-block" flex-gt-sm >
+            <label>ETAPA</label>
+            <input ng-model="$ctrl.vm.etapa.txEtapa" ng-required="true">
+        </md-input-container>
+
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>SECUENCIA</label>
+            <input ng-model="$ctrl.vm.etapa.nuSecuencia" ng-pattern="/^\d+$/" ng-required="true">
+            <div class="hint" ng-show="true">Valores numéricos enteros (#)</div>
+        </md-input-container>
+    </md-content>
+</form>
+<!--</div>--><script src="cat-etapas-detalle.srvc.js"></script>

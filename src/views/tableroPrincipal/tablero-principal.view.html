@@ -1,0 +1,32 @@
+<div class="container-fluid m-0 p-0" style="margin-top: 60px!important; height: 90%; width: 100%;">
+    <div class="row m-0 p-0 h-100 w-100">
+        <div class="col-2 col-sm-1 m-0 p-0">
+            <!------------  MENU ITEM ------------>
+            <div class="tab-menu-item tab-inactive" ng-repeat="m in lstTab" ng-class="m.lstTxClass" ng-click="tabClick($event,m)">
+                <div>
+                    <div>
+                        <i class="fa fa-1x" ng-class="m.txClassIcon" aria-hidden="true"></i>
+                    </div>
+                    <div>
+                        <span>{{m.txTitulo}}</span>
+                    </div>
+                </div>
+            </div>
+            <!------------  MENU ITEM ------------>
+        </div>
+        <div class="col-10 col-sm-11 h-100 w-100 p-1" style="background-color:#f7f7f7;">
+            <!--<div class="h-100 w-100" style="overflow: scroll;">
+
+            </div>-->
+            <div class="col-12 h-100 w-100 p-0 m-0" ng-if="selectedTab.id==1">
+                <div ui-view="resumen" class="h-100 w-100" ></div>
+            </div>
+            <div class="col-12 h-100 w-100 p-0 m-0" ng-if="selectedTab.id==2">
+                <div ui-view="porArea" class="h-100 w-100" ></div>
+            </div>
+            <div class="col-12 h-100 w-100 p-0 m-0" ng-if="selectedTab.id==3">
+                <detalle-servidores></detalle-servidores>
+            </div>
+        </div>
+    </div>
+</div>

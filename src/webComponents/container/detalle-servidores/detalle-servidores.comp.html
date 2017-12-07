@@ -1,0 +1,24 @@
+<div class="row no-gutters m-1 border align-items-center" style="height: 50px;background-color:white;">
+    <div class="col app-font-title pl-2 no-spaces" style="background-color:white;">
+        <span>Detalle</span>
+    </div>
+</div>
+<div class="row ">
+    <div class="col-5 no-spaces">
+        <hor-filtro
+                lst-ob-src="$ctrl.lstObFecha"
+                tx-titulo="Fecha de Información"
+                tx-id-item-field="nuFecha"
+                tx-tx-item-field="txFecha"
+                on-item-selected="$ctrl.fechaSelected(obItemSelected)"
+                ob-src-default="$ctrl.obFechaDefault"
+        >
+        </hor-filtro>
+    </div>
+</div>
+<div class="row no-spaces">
+    <div class="col-12 no-spaces" >
+        <detalle-servidores-tabla lst-ob-servidor="$ctrl.lstObServidores"></detalle-servidores-tabla>
+    </div>
+</div>
+

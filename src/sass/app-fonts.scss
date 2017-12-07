@@ -1,0 +1,16 @@
+@import "../sass/vars";
+@import "../components/bootstrap4/scss/bootstrap";
+
+//Variables
+$app-font-stack:'Helvetica','Helvetica Nue';
+$app-text-size-title:22px;
+
+//Clases
+.app-font-title{
+  font-family:$app-font-stack;
+  font-size:$app-text-size-title;
+  font-weight: bold;
+  color: #424949;
+}
+
+

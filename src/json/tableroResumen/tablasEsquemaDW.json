@@ -1,0 +1,78 @@
+{
+  "columnWidth": 1,
+  "marginBottom": 5,
+  "marginTop": 5,
+  "marginRight": 0,
+  "type": "serial",
+  "categoryField": "txTabla",
+  "rotate": true,
+  "startDuration": 1,
+  "fontFamily": "Helvetica",
+  "fontSize": 12,
+  "categoryAxis": {
+    "gridPosition": "start",
+    "axisColor": "#AAB3B3",
+    "gridThickness": 0,
+    "position":"left",
+    "inside":true,
+    "axisThickness":0,
+    "axisAlpha": 0
+  },
+  "trendLines": [],
+  "color":"#111111",
+  "graphs": [
+    {
+      "balloonText": "[[category]]:[[value]]",
+      "fillAlphas": 1,
+      "fontSize": 18,
+      "id": "AmGraph-1",
+      "title": "graph 1",
+      "type": "column",
+      "valueField": "nuRows",
+      "visibleInLegend": false,
+      "fillColors": "#5bdaaf",
+      "lineColor": "#5bdaaf",
+      "columnWidth":"0.8",
+      "labelOffset":10
+    },
+    {
+      "fontSize": 12,
+      "fillAlphas": 0,
+      "lineAlpha":0,
+      "id": "AmGraph-2",
+      "title": "graph 2",
+      "type": "column",
+      "valueField": "nuMaxCPU",
+      "visibleInLegend": false,
+      "fillColors": "#000000",
+      "lineColor": "#000000",
+      "columnWidth":"0.0",
+      "labelText": "[[nuPromedio]]",
+      "labelOffset":10,
+      "clustered":false
+    }
+
+  ],
+  "guides": [],
+  "valueAxes": [
+    {
+      "id": "va1",
+      "position": "left",
+      "strictMinMax": true,
+      "title": "",
+      "labelsEnabled":true,
+      "fontSize": 10,
+      "rotate": true,
+      "axisAlpha": 1
+    }
+  ],
+  "legend": {
+    "enabled": false
+  },
+  "dataProvider": [
+    {
+      "txFuente":"",
+      "nuValor":0
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+<md-list>
+    <md-subheader class="md-no-sticky">CATALOGOS</md-subheader>
+    <md-list-item ng-repeat="m in $ctrl.vm.menu.catalogos">
+        <md-button ng-click="$ctrl.onMenuClick(m)">
+            {{m.txName}}
+        </md-button>
+    </md-list-item>
+    <md-subheader class="md-no-sticky">PROYECTOS</md-subheader>
+    <md-list-item ng-repeat="m in $ctrl.vm.menu.proyectos">
+        <md-button ng-click="$ctrl.onMenuClick(m)">
+            {{m.txName}}
+        </md-button>
+    </md-list-item>
+</md-list>

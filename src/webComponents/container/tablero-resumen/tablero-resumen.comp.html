@@ -1,0 +1,72 @@
+<!-- Componente principal para el tablero -->
+<titulo-cont-comp
+        tx-titulo="Test"
+>
+</titulo-cont-comp>
+
+<div class="row no-gutters">
+    <div class="col-3 m-auto" ng-repeat="o in $ctrl.info track by $index">
+        <info-bit-cont
+                title="o.txSchema"
+                nu-data="o.nuTotalRows"
+                tx-format="#,##0"
+                class-icon="o.iconClass">
+        </info-bit-cont>
+    </div>
+</div>
+<div class="row mt-2" style="height: 80%;">
+    <div class="col-6 h-100">
+        <light-chart-container
+                str-title="Tablas por Esquema DW"
+                str-footer="Número de Registros por Tabla">
+            <chart>
+                <am-chart-vertical-bar
+                        id="tablasEsquemaDW"
+                        json-chart-path="json/tableroResumen/tablasEsquemaDW.json"
+                        set-on-top="true"
+                        maximize-attr="nuRows"
+                        max-attr="nuMaxCPU"
+                        max-attr-format="#,##0"
+                        max-graph-id="AmGraph-2"
+                        service-cnf="{
+                            idTab:3001,
+                            idGra:10001,
+                            idQry:1
+                        }"
+                        zoom="{
+                            ini:0,
+                            end:9
+                        }"
+                        >
+                </am-chart-vertical-bar>
+            </chart>
+        </light-chart-container>
+    </div>
+    <div class="col-6 h-100">
+        <light-chart-container
+                str-title="Tablas por Esquema SA"
+                str-footer="Número de Registros por Tabla">
+            <chart>
+                <am-chart-vertical-bar
+                        id="tablasEsquemaSA"
+                        json-chart-path="json/tableroResumen/tablasEsquemaDW.json"
+                        set-on-top="true"
+                        maximize-attr="nuRows"
+                        max-attr="nuMaxCPU"
+                        max-attr-format="#,##0"
+                        max-graph-id="AmGraph-2"
+                        service-cnf="{
+                            idTab:3001,
+                            idGra:10002,
+                            idQry:1
+                        }"
+                        zoom="{
+                            ini:0,
+                            end:9
+                        }"
+                >
+                </am-chart-vertical-bar>
+            </chart>
+        </light-chart-container>
+    </div>
+</div>

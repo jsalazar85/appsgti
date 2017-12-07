@@ -1,0 +1,40 @@
+<titulo-cont-comp
+        tx-titulo="Detalle por Mes"
+>
+</titulo-cont-comp>
+<div class="row">
+    <div class="col-4">
+        <hor-filtro
+                lst-ob-src="$ctrl.lstObSchema"
+                tx-titulo="Esquema"
+                tx-id-item-field="nuFecha"
+                tx-tx-item-field="txFecha"
+                on-item-selected="$ctrl.fechaSelected(obItemSelected)"
+                ob-src-default="$ctrl.obFechaDefault"
+        >
+        </hor-filtro>
+    </div>
+    <div class="col-4">
+        <hor-filtro
+                lst-ob-src="$ctrl.lstObSchema"
+                tx-titulo="Esquema"
+                tx-id-item-field="nuFecha"
+                tx-tx-item-field="txFecha"
+                on-item-selected="$ctrl.fechaSelected(obItemSelected)"
+                ob-src-default="$ctrl.obFechaDefault"
+        >
+        </hor-filtro>
+    </div>
+    <div class="col-4">
+        <hor-filtro
+                lst-ob-src="$ctrl.lstObSchema"
+                tx-titulo="Tabla"
+                tx-id-item-field="nuFecha"
+                tx-tx-item-field="txFecha"
+                on-item-selected="$ctrl.fechaSelected(obItemSelected)"
+                ob-src-default="$ctrl.obFechaDefault"
+        >
+        </hor-filtro>
+    </div>
+</div>
+

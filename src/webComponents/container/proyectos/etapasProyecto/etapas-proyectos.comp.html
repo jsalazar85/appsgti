@@ -1,0 +1,64 @@
+<!--<div layout="column" layout-fill>-->
+<form name="etapasProyectosComp" novalidate ng-submit="$ctrl.guardar()" layout="column" layout-fill>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <span class="md-truncate" style="position: absolute; top: 13px; bottom: 13px;">ETAPAS - {{$ctrl.proyecto.proyecto.txNmbrProyCrto}} - ({{$ctrl.forma.modo}})</span>
+            <span flex></span>
+            <md-button class="md-raised" aria-label="Learn More" ng-disabled="$ctrl.forma.disables['btnGuardar']" type="submit">
+                AGREGAR
+            </md-button>
+            <md-button class="md-raised" aria-label="Learn More" ng-disabled="$ctrl.forma.disables['btnCerrar']" ng-click="$ctrl.cerrar()">
+                CERRAR
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-content layout-padding style="margin-top: 10px;">
+            <md-input-container class="md-block" flex-gt-sm ng-if="$ctrl.txModo=='nuevo'">
+                <label>ETAPA</label>
+                <md-select ng-model="$ctrl.selectedEtapa" ng-disabled="$ctrl.forma.disables['etapas']" required>
+                    <md-option ng-repeat="etapa in $ctrl.etapas" ng-value="etapa">
+                        {{etapa.txEtapa}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+
+            <md-input-container class="md-block" flex-gt-sm ng-if="$ctrl.txModo=='edicion'">
+                <label>ETAPA</label>
+                <input ng-model="$ctrl.selectedEtapa.txEtapa" ng-disabled="true">
+            </md-input-container>
+
+            <md-input-container>
+                <label>FECHA INICIO</label>
+                <md-datepicker ng-model="$ctrl.fhInicio" ng-disabled="$ctrl.forma.disables['fhInicio']"
+                               md-min-date="$ctrl.vm.proyecto.proyectoFechas.fhInicio"
+                               md-max-date="$ctrl.vm.proyecto.proyectoFechas.fhFin"
+                               required>
+                </md-datepicker>
+            </md-input-container>
+            <md-input-container>
+                <label>FECHA FIN</label>
+                <md-datepicker ng-model="$ctrl.fhFin" ng-disabled="$ctrl.forma.disables['fhFin']"
+                               md-min-date="$ctrl.fhInicio"
+                               md-max-date="$ctrl.vm.proyecto.proyectoFechas.fhFin"
+                               required>
+                </md-datepicker>
+            </md-input-container>
+
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>ESTATUS</label>
+                <md-select ng-model="$ctrl.selectedEstatus" ng-disabled="$ctrl.forma.disables['estatus']" required>
+                    <md-option ng-repeat="est in $ctrl.estatus" ng-value="est">
+                        {{est.txEstatus}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+
+
+
+            <div style="height: 500px;">
+                &nbsp;
+            </div>
+    </md-content>
+</form>
+<!--</div>-->

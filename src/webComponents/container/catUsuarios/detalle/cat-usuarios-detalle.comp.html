@@ -1,0 +1,127 @@
+<script src="../cat-personas.srvc.js"></script>
+<style>
+    .hint {
+        /* Position the hint */
+        position: absolute;
+        left: 2px;
+        right: auto;
+        bottom: 7px;
+        /* Copy styles from ng-messages */
+        font-size: 12px;
+        line-height: 14px;
+        transition: all 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
+        /* Set our own color */
+        color: grey; }
+    .inputdemoErrorsAdvanced {
+        /* NOTE: Check the demo's HTML to see some additional RTL support CSS */
+        /* Setup animations similar to the ng-messages */ }
+    .inputdemoErrorsAdvanced .hint {
+        /* Position the hint */
+        position: absolute;
+        left: 2px;
+        right: auto;
+        bottom: 7px;
+        /* Copy styles from ng-messages */
+        font-size: 12px;
+        line-height: 14px;
+        transition: all 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
+        /* Set our own color */
+        color: grey; }
+    .inputdemoErrorsAdvanced .hint.ng-hide,
+    .inputdemoErrorsAdvanced .hint.ng-enter,
+    .inputdemoErrorsAdvanced .hint.ng-leave.ng-leave-active {
+        bottom: 26px;
+        opacity: 0; }
+    .inputdemoErrorsAdvanced .hint.ng-leave,
+    .inputdemoErrorsAdvanced .hint.ng-enter.ng-enter-active {
+        bottom: 7px;
+        opacity: 1; }
+
+</style>
+<!--<div layout="column" layout-fill>-->
+<form name="catUsuariosDetalleForm" novalidate ng-submit="$ctrl.clickGuardar()" layout="column" layout-fill>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <span class="md-truncate" style="position: absolute; top: 13px; bottom: 13px;">CATALOGO USUARIO - ({{$ctrl.form.modo}})</span>
+            <span flex></span>
+            <md-button class="md-raised" aria-label="Learn More" type="submit">
+                GUARDAR
+            </md-button>
+            <md-button class="md-raised" aria-label="Learn More" ng-disabled="$ctrl.forma.disables['btnCerrar']" ng-click="$ctrl.clickSalir()">
+                SALIR
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-content layout-padding style="margin-top: 10px;">
+        <!-- PERSONA ------------------------------------------>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <span>DATOS DE LA PERSONA</span>
+            </div>
+        </md-toolbar>
+        <md-input-container class="md-block" flex-gt-sm >
+            <label>NOMBRE</label>
+            <input ng-model="$ctrl.vm.m.p.txNombre" ng-required="true">
+        </md-input-container>
+
+        <md-input-container class="md-block" flex-gt-sm >
+            <label>APELLIDO(S)</label>
+            <input ng-model="$ctrl.vm.m.p.txApellido" ng-required="true">
+        </md-input-container>
+
+        <md-input-container class="md-block" flex-gt-sm >
+            <label>CORREO</label>
+            <input ng-model="$ctrl.vm.m.p.txCorreo" ng-required="true">
+        </md-input-container>
+
+        <md-input-container class="md-block" flex-gt-sm >
+            <label>TITULO</label>
+            <input ng-model="$ctrl.vm.m.p.txTitulo" ng-required="false">
+        </md-input-container>
+
+        <!-- USUARIO ------------------------------------------>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <span>DATOS DEL USUARIO</span>
+            </div>
+        </md-toolbar>
+
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>TIPO DE SEGURIDAD</label>
+            <md-select ng-model="$ctrl.vm.m.selectedLoginTipo" required>
+                <md-option ng-repeat="s in $ctrl.vm.m.lstLoginTipo" ng-value="s">
+                    {{s.txLoginTipo}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>NOMBRE DEL USUARIO DEL SISTEMA</label>
+            <input ng-model="$ctrl.vm.m.u.txLogin" ng-required="true">
+        </md-input-container>
+
+        <md-input-container class="md-block" flex-gt-sm ng-if="$ctrl.vm.m.selectedLoginTipo.idLoginTipo==2">
+            <label>PASSWORD</label>
+            <input ng-model="$ctrl.vm.m.u.txPwd" ng-required="true" type="password">
+        </md-input-container>
+
+        <!-- SEGURIDAD ------------------------------------------>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <span>SEGURIDAD</span>
+            </div>
+        </md-toolbar>
+
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>ROL</label>
+                <md-select ng-model="$ctrl.vm.m.selectedRol" required>
+                <md-option ng-repeat="s in $ctrl.vm.m.lstRoles" ng-value="s">
+                    {{s.txRol}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+
+    </md-content>
+</form>
+<!--</div>-->

@@ -1,0 +1,28 @@
+<style>
+
+
+
+    ._md ._md-toolbar-transitions{
+
+    }
+</style>
+<md-toolbar layout="row">
+    <md-button class="menu" hide-gt-sm ng-click="$ctrl.toggleList()" aria-label="Show User List">
+        <i class="fa fa-bars fa-2x" aria-hidden="true" style="color:white;"></i>
+    </md-button>
+
+    <div flex="grow">
+        <h1 class="md-truncate">Aplicativo de Planeación SGTI</h1>
+    </div>
+    <div flex="10" style="">
+        <md-button class="md-primary md-raised demo-menu-open-button"
+                   ng-click="$ctrl.confirmarSalir($event)">
+            {{$ctrl.txLogin}}
+        </md-button>
+    </div>
+    <div flex="5" style="">
+        <div flex id="globalLoading" style="width: 60px; height: 60px;">
+            <img src="img/spinner_04.gif" width="60" height="60" />
+        </div>
+    </div>
+</md-toolbar>

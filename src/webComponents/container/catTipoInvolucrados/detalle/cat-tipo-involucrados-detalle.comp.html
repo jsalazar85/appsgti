@@ -1,0 +1,83 @@
+    <script src="../cat-personas.srvc.js"></script>
+<style>
+    .hint {
+        /* Position the hint */
+        position: absolute;
+        left: 2px;
+        right: auto;
+        bottom: 7px;
+        /* Copy styles from ng-messages */
+        font-size: 12px;
+        line-height: 14px;
+        transition: all 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
+        /* Set our own color */
+        color: grey; }
+    .inputdemoErrorsAdvanced {
+        /* NOTE: Check the demo's HTML to see some additional RTL support CSS */
+        /* Setup animations similar to the ng-messages */ }
+    .inputdemoErrorsAdvanced .hint {
+        /* Position the hint */
+        position: absolute;
+        left: 2px;
+        right: auto;
+        bottom: 7px;
+        /* Copy styles from ng-messages */
+        font-size: 12px;
+        line-height: 14px;
+        transition: all 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
+        /* Set our own color */
+        color: grey; }
+    .inputdemoErrorsAdvanced .hint.ng-hide,
+    .inputdemoErrorsAdvanced .hint.ng-enter,
+    .inputdemoErrorsAdvanced .hint.ng-leave.ng-leave-active {
+        bottom: 26px;
+        opacity: 0; }
+    .inputdemoErrorsAdvanced .hint.ng-leave,
+    .inputdemoErrorsAdvanced .hint.ng-enter.ng-enter-active {
+        bottom: 7px;
+        opacity: 1; }
+
+</style>
+<!--<div layout="column" layout-fill>-->
+<form name="catUsuariosDetalleForm" novalidate ng-submit="$ctrl.clickGuardar()" layout="column" layout-fill>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <span class="md-truncate" style="position: absolute; top: 13px; bottom: 13px;">CATALOGO TIPO INVOLUCRADOS - ({{$ctrl.form.modo}})</span>
+            <span flex></span>
+            <md-button class="md-raised" aria-label="Learn More" type="submit">
+                GUARDAR
+            </md-button>
+            <md-button class="md-raised" aria-label="Learn More" ng-disabled="$ctrl.forma.disables['btnCerrar']" ng-click="$ctrl.clickSalir()">
+                SALIR
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-content layout-padding style="margin-top: 10px;">
+        <!-- PERSONA ------------------------------------------>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <span>INFORMACION GENERAL</span>
+            </div>
+        </md-toolbar>
+
+        <md-input-container class="md-block" flex-gt-sm >
+            <label>TIPO DE INVOLUCRADO</label>
+            <input ng-model="$ctrl.vm.m.i.txInvlTipo" ng-required="true">
+        </md-input-container>
+
+        <md-input-container class="md-block" flex-gt-sm >
+            <label>DESCRIPCION</label>
+            <input ng-model="$ctrl.vm.m.i.txInvlTipoDscr" ng-required="true">
+        </md-input-container>
+
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>ORDEN</label>
+            <input ng-model="$ctrl.vm.m.i.nuOrden" ng-pattern="/^\d+$/" ng-required="true">
+            <div class="hint" ng-show="true">Valores numéricos enteros para el ordenamiento lógico de la información (#)</div>
+        </md-input-container>
+
+
+    </md-content>
+</form>
+<!--</div>-->

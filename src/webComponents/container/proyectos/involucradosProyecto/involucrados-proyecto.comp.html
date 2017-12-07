@@ -1,0 +1,98 @@
+<!--<div layout="column" layout-fill>-->
+<style>
+    .autocomplete-custom-template li {
+        border-bottom: 1px solid #ccc;
+        height: auto;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        white-space: normal;
+    }
+    .autocomplete-custom-template li:last-child {
+        border-bottom-width: 0;
+    }
+    .autocomplete-custom-template .item-title,
+    .autocomplete-custom-template .item-metadata {
+        display: block;
+        line-height: 2;
+    }
+    .autocomplete-custom-template .item-title md-icon {
+        height: 18px;
+        width: 18px;
+    }
+</style>
+<form name="etapasProyectosComp" novalidate ng-submit="$ctrl.guardar()" layout="column" layout-fill style="width: 600px;">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <span class="md-truncate" style="position: absolute; top: 13px; bottom: 13px;">INVOLUCRADO PROYECTO - ({{$ctrl.forma.modo}})</span>
+            <span flex></span>
+            <md-button class="md-raised" aria-label="Learn More" ng-disabled="$ctrl.forma.disables['btnGuardar']" type="submit">
+                AGREGAR
+            </md-button>
+            <md-button class="md-raised" aria-label="Learn More" ng-disabled="$ctrl.forma.disables['btnCerrar']" ng-click="$ctrl.cerrar()">
+                CERRAR
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-content layout-padding style="margin-top: 10px;">
+        <!-- BUSQUEDA DE INVOLUCRADO-->
+        <md-autocomplete required
+                ng-disabled="$ctrl.vm.ac.isDisabled"
+                md-no-cache="$ctrl.vm.ac.noCache"
+                md-selected-item="$ctrl.vm.ac.selectedItem"
+                md-search-text-change="$ctrl.vm.ac.searchTextChange($ctrl.vm.ac.searchText)"
+                md-search-text="$ctrl.vm.ac.searchText"
+                md-selected-item-change="$ctrl.vm.ac.selectedItemChange(item)"
+                md-items="item in $ctrl.vm.ac.querySearch($ctrl.vm.ac.searchText)"
+                md-item-text="item.txNombreCompleto"
+                md-min-length="2"
+                placeholder="BUSQUEDA POR NOMBRE DE PERSONA"
+                md-menu-class="autocomplete-custom-template"
+                         ng-if="$ctrl.txModo=='nuevo'"
+        >
+            <md-item-template>
+                <span class="item-title">
+                    Nombre:<strong> {{item.txNombreCompleto}} </strong>
+                </span>
+                <span class="item-metadata">
+                    <span>
+                        Correo:<strong>{{item.txCorreo}}</strong>
+                    </span>
+                </span>
+                <span class="item-metadata">
+                    <span>
+                        Usuario:<strong>{{item.txLogin}}</strong>
+                    </span>
+                </span>
+            </md-item-template>
+        </md-autocomplete>
+
+        <md-input-container class="md-block" flex-gt-sm ng-if="$ctrl.txModo=='edicion'">
+            <label>PERSONA</label>
+            <input ng-model="$ctrl.vm.ac.selectedItem.txNombreCompleto" ng-disabled="true">
+        </md-input-container>
+
+        <!-- Tipo de Involucrado -->
+        <md-input-container class="md-block" flex-gt-sm style="margin-top: 50px;">
+            <label>TIPO DE INVOLUCRADO</label>
+            <md-select ng-model="$ctrl.vm.selectedTipoInv" required>
+                <md-option ng-repeat="tipoInv in $ctrl.catTipoInv" ng-value="tipoInv">
+                    {{tipoInv.txInvlTipo}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+
+        <md-checkbox ng-model="$ctrl.vm.invproy.bnReporta" aria-label="Reporta">
+            Reporta Avance
+        </md-checkbox>
+
+        <md-checkbox ng-model="$ctrl.vm.invproy.bnAprueba" aria-label="Aprueba">
+            Aprueba Avance
+        </md-checkbox>
+
+        <md-checkbox ng-model="$ctrl.vm.invproy.bnResponsableReporte" aria-label="Responsable">
+            Responsable TI en Tablero
+        </md-checkbox>
+    </md-content>
+</form>
+<!--</div>-->

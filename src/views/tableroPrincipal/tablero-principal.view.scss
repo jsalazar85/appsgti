@@ -1,0 +1,67 @@
+@import "../../sass/vars";
+@import "../../components/bootstrap4/scss/bootstrap";
+
+/*
+test
+asdfasd
+*/
+
+$tab-menu-item-width:80px;
+
+.no-spaces{
+  @extend .p-0;
+  @extend .m-0;
+}
+
+// FONTS ------------------------------
+.tab-font-1{
+  font-family: "Helvetica Neue",Helvetica;
+  font-size: 13px;
+}
+
+// MENU ITEM ------------------------------
+.tab-menu-item{
+  @extend .float-right;
+  @extend .d-flex;
+  @extend .flex-column;
+  cursor: pointer;
+  width: $tab-menu-item-width;
+
+  div{
+    @extend .p-2;
+    div{
+      background-color:#f7f7f7;
+      @extend .d-flex;
+      @extend .justify-content-center;
+    }
+    div{
+      @extend .no-spaces;
+      span{
+        @extend .tab-font-1;
+        display:block;
+        word-wrap:break-word;
+        text-align: center;
+        //width: 90%;
+      }
+    }
+  }
+}
+
+.tab-menu-item.tab-inactive:hover{
+  @extend .tab-inactive-hover;
+}
+
+.tab-inactive{
+  background-color:whitesmoke;
+  opacity: 0.5;
+}
+
+.tab-inactive-hover{
+  background-color:whitesmoke;
+  opacity: 0.75;
+}
+
+.tab-active{
+  background-color:whitesmoke;
+  opacity: 1 !important;
+}
