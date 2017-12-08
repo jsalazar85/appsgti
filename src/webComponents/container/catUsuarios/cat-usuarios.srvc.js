@@ -6,7 +6,9 @@ angular
         'chartDataService',
         'eventService',
         'crudBaseSrvc',
-        function ($rootScope,gc,cds,es,cbs){
+        'catSubdireccionSrvc',
+        'isService',
+        function ($rootScope,gc,cds,es,cbs,catSubdireccionSrvc,isService){
             var srvc=this;
 
             //Obtiene el grid de personas
@@ -41,6 +43,74 @@ angular
                         console.log(response);
                     }
                 };
+
+                return petition;
+            };
+
+            srvc.getRequestLoginSubdir=function (idLogin) {
+                var petition={
+                    url:gc.conf.xsServicesBaseUrl+'/execTabQueryFilter.xsjs',
+                    query:{
+                        idTab:8001,
+                        idGra:4,
+                        idQry:4,
+                    },
+                    success: function(response){
+                        srvc.notify(srvc.e.getRequestLoginSubdir,response);
+                    },
+                    error: function(response,error){
+                        console.log("error");
+                        console.log(response);
+                    }
+                };
+
+
+                if(!isService.isEmptyStr(idLogin)){
+                    petition.query.lstObConditions=[
+                        {
+                            txCol:"ID_LOGIN",
+                            txAlias:"loginSubdir",
+                            varValue:idLogin,
+                            txValueType:"NUMERO",
+                            txLogicOperator:"AND",
+                            txCompOperator:"="
+                        }
+                    ];
+                }
+
+
+                return petition;
+            };
+
+            srvc.getRequestLoginSubdirCross=function (idLogin) {
+                var petition={
+                    url:gc.conf.xsServicesBaseUrl+'/execTabQueryFilter.xsjs',
+                    query:{
+                        idTab:8001,
+                        idGra:4,
+                        idQry:5,
+                    },
+                    success: function(response){
+                        srvc.notify(srvc.e.getRequestLoginSubdirCross,response);
+                    },
+                    error: function(response,error){
+                        console.log("error");
+                        console.log(response);
+                    }
+                };
+
+                if(!isService.isEmptyStr(idLogin)){
+                    petition.query.lstObConditions=[
+                        {
+                            txCol:"ID_LOGIN",
+                            txAlias:"subdir",
+                            varValue:idLogin,
+                            txValueType:"NUMERO",
+                            txLogicOperator:"AND",
+                            txCompOperator:"="
+                        }
+                    ];
+                }
 
                 return petition;
             };
@@ -96,6 +166,7 @@ angular
             };
 
             srvc.getData=function (idLogin) {
+                console.log("getData ini");
                 //Peticion del catalogo de tipos
                 var catTipo=srvc.getPetitionLoginTipo();
                 cds.cleanWorkList("catUsuariosSrvcLst");
@@ -107,14 +178,31 @@ angular
                 cds.addWorkTask(srvc.e.getRoles,catRoles);
                 cds.addWorkList("catUsuariosSrvcLst",srvc.e.getRoles);
 
+                //Peticion de catalogo de subdirecciones
+                var reqSubdir=catSubdireccionSrvc.getRequestSubdirecciones();
+                console.log(reqSubdir);
+                cds.addWorkTask(srvc.e.getSubdirecciones,reqSubdir);
+                cds.addWorkList("catUsuariosSrvcLst",srvc.e.getSubdirecciones);
+
+                //Peticion de catalogo de login subdirecciones
+                var reqLoginSubdir=srvc.getRequestLoginSubdirCross(idLogin);
+                console.log(reqLoginSubdir);
+                cds.addWorkTask(srvc.e.getRequestLoginSubdirCross,reqLoginSubdir);
+                cds.addWorkList("catUsuariosSrvcLst",srvc.e.getRequestLoginSubdirCross);
+
                 //Agregar peticion de login
+                console.log(idLogin);
                 if(!_.isEmpty(idLogin)){
+                    console.log("no es vacio");
                     var catUsuario=srvc.getPetitionUsuario(idLogin);
                     cds.addWorkTask(srvc.e.getUsuarioById,catUsuario);
                     cds.addWorkList("catUsuariosSrvcLst",srvc.e.getUsuarioById);
+                }else{
+                    console.log("login vacio");
                 }
 
                 cds.doWorkList("catUsuariosSrvcLst");
+                console.log("getData end");
             };
 
             srvc.getCountTxUsuario=function (txUsuario,idLogin) {
@@ -153,7 +241,7 @@ angular
                     });
                 }
 
-                cbs.getDataById(peticion,srvc.e.getCountTxUsuario);
+                    cbs.getDataById(peticion,srvc.e.getCountTxUsuario);
             }
 
 
@@ -164,7 +252,10 @@ angular
 
             //</editor-fold> ////////////////////
 
-            srvc.putDataEntities=function (obModel) {
+            srvc.putDataEntities=function (vm) {
+                var obModel=vm.m;
+                console.log("putDataEntities ini");
+
                 console.log(obModel);
                 obModel.idPersona = (_.isEmpty(obModel.p.idPersona))?srvc.getBigIntId():obModel.p.idPersona;
                 obModel.idLogin = (_.isEmpty(obModel.u.idLogin))?srvc.getBigIntId():obModel.u.idLogin;
@@ -200,7 +291,29 @@ angular
                     }]
                 };
 
-                cbs.putArrayData([obPersona,obLogin],srvc.e.putUsuario);
+                //Funciones para convertir las subdirecciones que fueron elegidas
+                var obSubdir= {
+                    tabledef: {
+                        txSchema: "DATAUSER",
+                        txTable: "ASPS_LOGIN_SUBDIR"
+                    }
+                    , data: []
+                };
+                _.forEach(vm.lstSubdirecciones,function (item) {
+                    var ob={};
+                    ob.idLoginSubdir=item.idLoginSubdir;
+                    ob.idLogin=item.idLogin;
+                    ob.idSubdireccion=item.idSubdireccion;
+                    ob.bnAplica=isService.toNumberBoolFromVarWithDefault(item.bnAplica,0);
+
+                    obSubdir.data.push(ob);
+                });
+
+                console.log(obSubdir);
+
+                cbs.putArrayData([obPersona,obLogin,obSubdir],srvc.e.putUsuario);
+
+                console.log("putDataEntities end");
             };
 
             srvc.delElement=function (id) {
@@ -252,6 +365,10 @@ angular
                     getCountTxUsuario:"catUsuariosSrvc.getCountTxUsuario",
                     delElement:"catUsuariosSrvc.delElement",
                     getRoles:"catUsuariosSrvc.getRoles",
+                    getSubdirecciones:catSubdireccionSrvc.e.getSubdirecciones,
+                    getRequestLoginSubdir:"catUsuariosSrvc.getRequestLoginSubdir",//catSubdireccionSrvc.e.getRequestLoginSubdir,
+                    //getRequestLoginSubdirCross
+                    getRequestLoginSubdirCross:"catUsuariosSrvc.getRequestLoginSubdirCross",//catSubdireccionSrvc.e.getRequestLoginSubdir,
                 };
 
                 console.log("catUsuariosSrvc - Init Model - Ended");

@@ -8,6 +8,17 @@ angular
             var ctrl = this;
 
             //<editor-fold desc="EVENTOS SERVICIOS"> ///////////////
+            ctrl.ongetRequestLoginSubdirCross=function (event,data) {
+                console.log("loginCtrl.ongetRequestLoginSubdirCross ini");
+
+                var res=data.data.data;
+                console.log(res);
+                appSecService.loginSubdir=res;
+
+
+                console.log("loginCtrl.ongetRequestLoginSubdirCross end");
+            };
+
             ctrl.onGetLoginInfoByTxLogin=function (event,data) {
                 console.log("loginCtrl.onGetLoginInfoByTxLogin ini");
                 console.log(data);
@@ -22,6 +33,10 @@ angular
                     res=res[0];
                     console.log(res);
                     ctrl.usr=res;
+                    appSecService.usr=res;
+
+                    appSecService.getAttemptLogin(ctrl.txLogin,ctrl.txPwd);
+                    /*
                     if(res.idLoginTipo==1){
                         console.log("active directory");
                         appSecService.getLoginLdap(ctrl.txLogin,ctrl.txPwd);
@@ -29,6 +44,7 @@ angular
                         console.log("sistema");
                         appSecService.getLoginAccess(ctrl.txLogin,ctrl.txPwd);
                     }
+                    */
                 }
                 console.log("loginCtrl.onGetLoginInfoByTxLogin end");
             };
@@ -37,7 +53,8 @@ angular
                 console.log("loginCtrl.onGetLoginAccess ini");
 
                 console.log(data);
-                var res=data.data;
+                var res=data.data.data;
+                console.log(res);
                 if(_.isNil(res[0])){
                     ctrl.txReqResponse="Usuario o contraseña incorrecta";
                 }else{
@@ -61,6 +78,8 @@ angular
                 }
                 console.log("loginCtrl.onGetLoginLdap ini");
             };
+
+
 
             //</editor-fold>
 
@@ -86,6 +105,11 @@ angular
                 appSecService.suscribe($scope,ctrl.onGetLoginAccess,appSecService.e.getLoginAccess);
                 //getLoginLdap
                 appSecService.suscribe($scope,ctrl.onGetLoginLdap,appSecService.e.getLoginLdap);
+                //getLoginLdap
+                appSecService.suscribe($scope,ctrl.ongetAttemptLogin,appSecService.e.getAttemptLogin);
+                appSecService.suscribe($scope,ctrl.ongetRequestLoginSubdir,appSecService.e.getRequestLoginSubdir);
+                //getRequestLoginSubdirCross
+                appSecService.suscribe($scope,ctrl.ongetRequestLoginSubdirCross,appSecService.e.getRequestLoginSubdirCross);
 
                 console.log('loginCtrl.$onInit end');
             };

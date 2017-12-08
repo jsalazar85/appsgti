@@ -28,6 +28,18 @@ angular
                 return str;
             };
 
+            srvc.getBigIntIdFromDate=function (dt) {
+                var now=dt;
+                var str="";
+                str+=now.getFullYear();
+                str+=_.padStart(now.getMonth()+1,2,'0');
+                str+=_.padStart(now.getDate(),2,'0');
+                str+=_.padStart(now.getHours(),2,'0');
+                str+=_.padStart(now.getMinutes(),2,'0');
+                str+=_.padStart(now.getSeconds(),2,'0');
+                return str;
+            };
+
             srvc.getSafeDate=function (date) {
                 console.log("srvc.getSafeDate ini");
 

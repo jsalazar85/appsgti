@@ -1,0 +1,27 @@
+<!--<div layout="column" layout-fill>-->
+<form name="etapasProyectosComp" novalidate ng-submit="$ctrl.guardar()" layout="column" layout-fill>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <span class="md-truncate" style="position: absolute; top: 13px; bottom: 13px;">ETAPAS - {{$ctrl.proyecto.proyecto.txNmbrProyCrto}} - ({{$ctrl.forma.modo}})</span>
+            <span flex></span>
+            <md-button class="md-raised" aria-label="Learn More" ng-disabled="$ctrl.forma.disables['btnGuardar']" type="submit">
+                AGREGAR
+            </md-button>
+            <md-button class="md-raised" aria-label="Learn More" ng-disabled="$ctrl.forma.disables['btnCerrar']" ng-click="$ctrl.cerrar()">
+                CERRAR
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-content layout-padding style="margin-top: 10px;">
+            <md-input-container class="md-block" flex-gt-sm ng-if="$ctrl.txModo=='nuevo'">
+                <label>SUBDIRECCION</label>
+                <md-select ng-model="$ctrl.selectedEtapa" ng-disabled="$ctrl.forma.disables['etapas']" required>
+                    <md-option ng-repeat="etapa in $ctrl.etapas" ng-value="etapa">
+                        {{etapa.txEtapa}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+    </md-content>
+</form>
+<!--</div>-->

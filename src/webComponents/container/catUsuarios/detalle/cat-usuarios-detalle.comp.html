@@ -122,6 +122,19 @@
             </md-select>
         </md-input-container>
 
+        <!-- AREAS A REPORTAR ------------------------------------------>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <span>SUBDIRECCIONES</span>
+            </div>
+        </md-toolbar>
+        <md-list ng-cloak>
+            <md-list-item ng-repeat="subdir in $ctrl.vm.lstSubdirecciones">
+                <p> {{ subdir.txSubdireccion }} </p>
+                <md-checkbox class="md-secondary" ng-model="subdir.bnAplica"></md-checkbox>
+            </md-list-item>
+        </md-list>
+
     </md-content>
 </form>
 <!--</div>-->

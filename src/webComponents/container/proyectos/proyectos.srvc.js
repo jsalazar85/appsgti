@@ -11,7 +11,8 @@ angular
         'isService',
         'catAreasSrvc',
         'catSubdireccionSrvc',
-        function ($rootScope,gc,cds,es,cbs,catEtapasSrvc,catTipoInvolucradosSrvc,iss,catAreasSrvc,catSubdireccionSrvc){
+        'appSecService',
+        function ($rootScope,gc,cds,es,cbs,catEtapasSrvc,catTipoInvolucradosSrvc,iss,catAreasSrvc,catSubdireccionSrvc,appSecService){
             var srvc=this;
 
             //<editor-fold desc="FUNCIONES DE INICIALIZACION"> ///////////////
@@ -303,7 +304,7 @@ angular
                         {
                             txCol:"ID_LOGIN",
                             txAlias:"logins",
-                            varValue:20171207223819,
+                            varValue:appSecService.usr.idLogin,
                             txValueType:"NUMERO",
                             txLogicOperator:"AND",
                             txCompOperator:"="

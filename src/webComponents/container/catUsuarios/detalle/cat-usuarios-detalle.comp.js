@@ -22,6 +22,24 @@ angular
                     var idLogin=null;
                     if(ctrl.form.modo=="EDICIÓN"){
                         idLogin=ctrl.vm.m.u.idLogin;
+
+                        var firstItem=ctrl.vm.lstSubdirecciones[0];
+                        if(_.isNil(firstItem.idLoginSubdir)){
+                            var dt=new Date();
+                            _.forEach(ctrl.vm.lstSubdirecciones,function (ob) {
+                                ob.idLogin=ctrl.vm.m.u.idLogin;
+                                ob.idLoginSubdir=catUsuariosSrvc.getBigIntIdFromDate(dt);
+                                dt.setSeconds(dt.getSeconds() + 1);
+                            });
+                        }
+
+                    }else{
+                        var dt=new Date();
+                        _.forEach(ctrl.vm.lstSubdirecciones,function (ob) {
+                            ob.idLogin=ctrl.vm.m.u.idLogin;
+                            ob.idLoginSubdir=catUsuariosSrvc.getBigIntIdFromDate(dt);
+                            dt.setSeconds(dt.getSeconds() + 1);
+                        });
                     }
                     catUsuariosSrvc.getCountTxUsuario(ctrl.vm.m.u.txLogin,idLogin);
                 }
@@ -33,9 +51,58 @@ angular
                 //Invocar los eventos del componente
                 ctrl.onSalir({data:null,msg:null});
             };
+
+            ctrl.clickAgregarSubdireccion=function (ev) {
+                console.log("modalEtapa");
+
+                ctrl.vm.modalEtapaAccion="nuevo";
+                ctrl.selectedEtapa=null;
+                $mdDialog.show({
+                    contentElement: '#dlgSubdirecciones',
+                    parent: angular.element(document.body),
+                    targetEvent: ev,
+                    clickOutsideToClose: false
+                });
+                $rootScope.$emit('catUsuariosDetalleCtrl.onInicializar',{selectedEtapa:null,txModo:ctrl.vm.modalEtapaAccion});
+            };
+
+
+            ctrl.onGridClickEditar=function (ev,row) {
+                console.log(ev);
+                console.log(row.entity);
+
+                ctrl.vm.modalEtapaAccion="edicion";
+                ctrl.selectedEtapa=row.entity;
+                //$scope.$apply();
+                $mdDialog.show({
+                    contentElement: '#etapaProyectoCompDlg',
+                    parent: angular.element(document.body),
+                    targetEvent: ev,
+                    clickOutsideToClose: false
+                });
+                $rootScope.$emit('etapasProyectoCtrl.onInicializar',{selectedEtapa:ctrl.selectedEtapa, txModo:ctrl.vm.modalEtapaAccion});
+            };
             //</editor-fold> ////////////////////
 
             //<editor-fold desc="EVENTOS SERVICIOS"> ///////////////
+            ctrl.getRequestLoginSubdirCross=function (event,data) {
+                console.log("getRequestLoginSubdir ini");
+                //Obtener el dato----
+                //console.log(data);
+                var lstSubdirecciones=data.data.data;
+
+                _.forEach(lstSubdirecciones,function (item) {
+                    item.bnAplica=(item.bnAplica==1)?true:false;
+                });
+
+                console.log(lstSubdirecciones);
+
+
+                //Cargar en el modelo el catalogo de tipos
+                ctrl.vm.lstSubdirecciones=lstSubdirecciones;
+                console.log("getRequestLoginSubdir end");
+            };
+
             ctrl.onGetLoginTipo=function (event,data) {
                 //Obtener el dato----
                 console.log(data);
@@ -58,6 +125,7 @@ angular
             };
 
             ctrl.onGetUsuarioById=function (event,data) {
+                console.log("onGetUsuarioById - ini");
                 //Obtener el dato----
                 console.log(data);
                 var response=data.data.data[0];
@@ -85,6 +153,7 @@ angular
                         ctrl.vm.m.selectedRol= ctrl.vm.m.lstRoles[i];
                     }
                 }
+                console.log("onGetUsuarioById - end");
             };
 
             ctrl.onGetCountTxUsuario=function (event,data) {
@@ -94,7 +163,7 @@ angular
 
                 if(response.nuCount<=0){
                     //Guardar
-                    catUsuariosSrvc.putDataEntities(ctrl.vm.m);
+                    catUsuariosSrvc.putDataEntities(ctrl.vm);
                 }else{
                     ctrl.showMensaje("Nombre de usuario ya existe");
                 }
@@ -163,6 +232,7 @@ angular
                 catUsuariosSrvc.suscribe($scope,ctrl.onGetCountTxUsuario,catUsuariosSrvc.e.getCountTxUsuario);
                 catUsuariosSrvc.suscribe($scope,ctrl.onGetRoles,catUsuariosSrvc.e.getRoles);
                 catUsuariosSrvc.suscribe($scope,ctrl.onPutUsuario,catUsuariosSrvc.e.putUsuario);
+                catUsuariosSrvc.suscribe($scope,ctrl.getRequestLoginSubdirCross,catUsuariosSrvc.e.getRequestLoginSubdirCross);
 
                 //catUsuariosSrvc.suscribe($scope,ctrl.onPutEtapaSuccess,catUsuariosSrvc.e.putEtapaSuccess);
             };
@@ -178,7 +248,58 @@ angular
                     ctrl.form.modo="EDICIÓN";
                 }
             };
+
+            ctrl.initGrid01=function () {
+                var editCellTemplate = '<div class="ngCellText ui-grid-cell-contents" style="cursor: pointer;" >' +
+                    ' <div ng-click="grid.appScope.onGrid01ClickEditar($event,row)"><i class="fa fa-pencil" aria-hidden="true"></i></div>' +
+                    '</div>';
+                var deleteCellTemplate = '<div class="ngCellText ui-grid-cell-contents" style="cursor: pointer;" >' +
+                    ' <div ng-click="grid.appScope.onGrid01ClickBorrar($event,row)"><i class="fa fa-eraser" aria-hidden="true"></i></div>' +
+                    '</div>';
+                var gridOpts={
+                    columnDefs:[
+                        {
+                            field:"txSubdireccion",
+                            name:"Subdireccion",
+                            type:"string",
+                            width:"35%"
+                        },
+                        {
+                            field:"txSubdirabbr",
+                            name:"Nombre Corto",
+                            type:"string",
+                            width:"20%"
+                        }
+                    ]
+                };
+                //Asignar el scope
+                gridOpts.appScopeProvider=ctrl;
+                gridOpts.data=[];
+                //Asignar al grid
+                return gridOpts;
+            };
             //</editor-fold> ////////////////////
+
+            //<editor-fold desc="FUNCIONES PARA LOS INVOLUCRADOS"> ///////////////
+            //Invoca el modal para editar un registro
+            ctrl.modalSubdireccion=function(ev,row){
+                console.log(ev);
+                console.log(row.entity);
+
+                ctrl.vm.modalSubdireccionAccion="edicion";
+                ctrl.selectedSubdireccion=row.entity;
+                //$scope.$apply();
+                $mdDialog.show({
+                    contentElement: '#dlgSubdirecciones',
+                    parent: angular.element(document.body),
+                    targetEvent: ev,
+                    clickOutsideToClose: false
+                });
+                $rootScope.$emit('catUsuariosDetalleCtrl.onInicializar',{selectedEtapa:ctrl.selectedEtapa,txModo:ctrl.vm.modalEtapaAccion});
+            };
+            //</editor-fold>
+
+
 
             ctrl.$onInit=function () {
                 ctrl.initModel();

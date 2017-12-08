@@ -7,7 +7,8 @@ angular
         'eventService',
         'crudBaseSrvc',
         'isService',
-        function ($rootScope,gc,cds,es,cbs,iss){
+        'catUsuariosSrvc',
+        function ($rootScope,gc,cds,es,cbs,iss,catUsuariosSrvc){
             var srvc=this;
 
             //<editor-fold desc="CONSULTAS"> ///////////////
@@ -150,6 +151,68 @@ angular
                 cbs.getDataFromRequestObj(request);
                 console.log("catAreasSrvc.getLoginLdap end");
             };
+
+            srvc.getRequestLoginLdap=function (txLogin,txPwd) {
+                console.log("catAreasSrvc.getRequestLoginLdap ini");
+                var req=null;
+                if(!_.isNil(txLogin)){
+                    req= {
+                        url: gc.conf.xsServicesTranBaseUrl+'/loginldap.xsjs',//gc.conf.xsServicesBaseUrl + '/execTabQueryFilter.xsjs',
+                        query: {
+                            txLogin:txLogin,
+                            txPwd:txPwd,
+                        },
+                        success: function (response) {
+                            console.log("getRequestLoginLdap: success");
+                            srvc.notify(srvc.e.getLoginLdap, response);
+                        },
+                        error: function (response, error) {
+                            console.log("8001,11,1: error");
+                            console.log(response);
+                        }
+                    };
+                }
+
+                console.log("catAreasSrvc.getRequestLoginLdap end");
+                return req;
+            };
+
+            srvc.getAttemptLogin=function (txLogin,txPwd) {
+                console.log("getAttemptLogin ini");
+                var attemptLoginReq;
+                var listName="appSecService.getAttemptLogin";
+                console.log(srvc.usr);
+                if(!_.isNil(srvc.usr)){
+                    console.log("crear responses");
+                    //Obtener el request del login
+                    if(srvc.usr.idLoginTipo==1){
+                        //Active Directory
+                        attemptLoginReq=srvc.getLoginLdap(txLogin,txPwd);
+                    }else{
+                        //Inicio de Sesion por sistema
+                        attemptLoginReq=srvc.getRequestLoginAccess(txLogin,txPwd);
+                    }
+
+                    //console.log(attemptLoginReq);
+
+                    //Obtener el request de la consulta de catalogo de subdirecciones
+                    var loginSubdir=catUsuariosSrvc.getRequestLoginSubdirCross(srvc.usr.idLogin);
+
+                    //Agregar tareas a la lista
+                    cds.cleanWorkList(listName);
+                    cds.addWorkTask(srvc.e.getAttemptLogin,attemptLoginReq);
+                    cds.addWorkList(listName,srvc.e.getAttemptLogin);
+
+                    cds.addWorkTask(srvc.e.getRequestLoginSubdirCross,loginSubdir);
+                    cds.addWorkList(listName,srvc.e.getRequestLoginSubdirCross);
+
+                    cds.doWorkList(listName);
+                }else{
+                    console.log("usr is null");
+                }
+                console.log("getAttemptLogin end");
+
+            };
             //</editor-fold> ////////////////////
 
             srvc.setLoguedUser=function (usr,isLogged) {
@@ -184,6 +247,10 @@ angular
                     getRequestLoginInfoByTxLogin:"appSecService.getRequestLoginInfoByTxLogin",
                     getLoginAccess:"appSecService.getLoginAccess",
                     getLoginLdap:"appSecService.getLoginLdap",
+                    getAttemptLogin:"appSecService.getAttemptLogin",
+                    getRequestLoginSubdir:catUsuariosSrvc.e.getRequestLoginSubdir,
+                    getRequestLoginSubdirCross:catUsuariosSrvc.e.getRequestLoginSubdirCross,
+
                 };
 
                 console.log("appSecService - Init Model - end");
