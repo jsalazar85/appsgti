@@ -57,37 +57,37 @@ angular
                     columnDefs:[
                         {
                             field:"txNombre",
-                            name:"NOMBRE",
+                            name:"Nombre",
                             type:"string",
-                            width:"25%"
+                            width:"20%"
                         },
                         {
                             field:"txApellido",
-                            name:"APELLIDO",
+                            name:"Apellido",
                             type:"string",
-                            width:"25%"
+                            width:"20%"
                         },
                         {
                             field:"txCorreo",
-                            name:"CORREO",
+                            name:"Correo",
                             type:"string",
-                            width:"25%"
+                            width:"20%"
                         },
                         {
                             field:"txTitulo",
-                            name:"TITULO",
+                            name:"Título",
                             type:"string",
-                            width:"25%"
+                            width:"20%"
                         },
                         {
-                            name:"EDITAR",
-                            width:"5%",
+                            name:"Editar",
+                            width:"7%",
                             cellTemplate:editCellTemplate,
                             enableSorting:false
                         },
                         {
-                            name:"BORRAR",
-                            width:"5%",
+                            name:"Borrar",
+                            width:"9%",
                             cellTemplate:deleteCellTemplate,
                             enableSorting:false
                         },

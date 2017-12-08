@@ -41,7 +41,7 @@ angular
                 //Cargar datos:
                 ctrl.vm.m.i.idInvlTipo=response.idInvlTipo;
                 ctrl.vm.m.i.txInvlTipo=response.txInvlTipo; //TX_INVL_TIPO
-                ctrl.vm.m.i.nuOrden=response.nuOrden; //NU_ORDEN
+                ctrl.vm.m.i.nuOrden=response.nuOrden==null?0:parseInt(response.nuOrden);; //NU_ORDEN
                 ctrl.vm.m.i.txInvlTipoDscr=response.txInvlTipoDscr; //TX_INVL_TIPO_DSCR
                 ctrl.vm.m.i.bnActivo=response.bnActivo; //BN_ACTIVO
             };

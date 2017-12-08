@@ -7,8 +7,9 @@ angular
         'eventService',
         'crudBaseSrvc',
         'isService',
+        'catAreasSrvc',
         'catSubdireccionSrvc',
-        function ($rootScope,gc,cds,es,cbs,iss, subdirSrvc){
+        function ($rootScope,gc,cds,es,cbs,iss, catAreasSrvc,catSubdireccionSrvc){
             var srvc=this;
 
             //<editor-fold desc="FUNCIONES DE OBTENCION DE DATOS"> ///////////////
@@ -151,7 +152,6 @@ angular
                 cbs.putArrayData([ob],srvc.e.delElement);
             };
 
-
             //Funcion de inicializacion -------
             srvc.initModel=function () {
                 console.log("avanceProyectoSrvc - Init Model - Ini");
@@ -174,7 +174,7 @@ angular
                     getAvance:"avanceProyectoSrvc.getAvance",
                     getAvancesAll:"avanceProyectoSrvc.getAvancesAll",
                     putData:"avanceProyectoSrvc.putData",
-                    delElement:"avanceProyectoSrvc.delElement",
+                    delElement:"avanceProyectoSrvc.delElement"
                 };
 
                 console.log("avanceProyectoSrvc - Init Model - end");

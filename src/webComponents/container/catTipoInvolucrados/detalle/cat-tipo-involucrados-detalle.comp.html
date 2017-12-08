@@ -73,7 +73,7 @@
 
         <md-input-container class="md-block" flex-gt-sm>
             <label>ORDEN</label>
-            <input ng-model="$ctrl.vm.m.i.nuOrden" ng-pattern="/^\d+$/" ng-required="true">
+            <input ng-model="$ctrl.vm.m.i.nuOrden" ng-pattern="/^\d+$/" ng-required="true" type="number" min="0">
             <div class="hint" ng-show="true">Valores numéricos enteros para el ordenamiento lógico de la información (#)</div>
         </md-input-container>
 

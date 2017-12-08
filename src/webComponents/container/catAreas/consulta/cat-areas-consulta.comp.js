@@ -111,13 +111,13 @@ angular
                         },
                         {
                             name:"EDITAR",
-                            width:"5%",
+                            width:"7%",
                             cellTemplate:editCellTemplate,
                             enableSorting:false
                         },
                         {
                             name:"BORRAR",
-                            width:"5%",
+                            width:"9%",
                             cellTemplate:deleteCellTemplate,
                             enableSorting:false
                         },

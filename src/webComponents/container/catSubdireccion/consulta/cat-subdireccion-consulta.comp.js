@@ -104,14 +104,14 @@ angular
                             width:"25%"
                         },
                         {
-                            name:"EDITAR",
-                            width:"5%",
+                            name:"Editar",
+                            width:"7%",
                             cellTemplate:editCellTemplate,
                             enableSorting:false
                         },
                         {
-                            name:"BORRAR",
-                            width:"5%",
+                            name:"Borrar",
+                            width:"9%",
                             cellTemplate:deleteCellTemplate,
                             enableSorting:false
                         },

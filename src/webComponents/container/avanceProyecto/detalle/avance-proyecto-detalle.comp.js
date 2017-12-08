@@ -61,12 +61,13 @@ angular
                 }else{
                     ctrl.vm.m.av.prComprometido=0;
                 }
-
-                ctrl.vm.m.av.prReal=null;
-                ctrl.vm.m.av.prSigCorte=null;
-                ctrl.vm.m.av.txAccnSemana="";
-                ctrl.vm.m.av.txAccnSiguiente="";
-                ctrl.vm.m.av.txAccnRiesgos="";
+                ctrl.vm.m.av.fhReporte=ob.fhReporte;
+                ctrl.vm.m.av.prReal=ob.prReal==null?0:parseInt(ob.prReal.replace("%",""));
+                ctrl.vm.m.av.prSigCorte=ob.prSigCorte==null?0:parseInt(ob.prSigCorte.replace("%",""));
+                console.log(ctrl.vm.m.av.prSigCorte);
+                ctrl.vm.m.av.txAccnSemana=ob.txAccnSemana;
+                ctrl.vm.m.av.txAccnSiguiente=ob.txAccnSiguiente;
+                ctrl.vm.m.av.txAccnRiesgos=ob.txAccnRiesgos;
                 ctrl.vm.m.av.idPrycSeguimiento=avanceProyectoSrvc.getBigIntId();
 
                 console.log("avanceProyectoDetalleCtrl.onGetAvance end");
@@ -170,12 +171,10 @@ angular
 
             ctrl.$onInit=function () {
                 ctrl.initModel();
-
                 //Inscribir a eventos del servicio
                 avanceProyectoSrvc.suscribe($scope,ctrl.onGetAvance,avanceProyectoSrvc.e.getAvance);
-                //avanceProyectoSrvc.suscribe($scope,ctrl.onPutData,avanceProyectoSrvc.e.putData);
+               //avanceProyectoSrvc.suscribe($scope,ctrl.onPutData,avanceProyectoSrvc.e.putData);
                 //avanceProyectoSrvc.suscribe($scope,ctrl.onGetSubdirecciones,avanceProyectoSrvc.e.getSubdirecciones);
-
             };
         }
     ])

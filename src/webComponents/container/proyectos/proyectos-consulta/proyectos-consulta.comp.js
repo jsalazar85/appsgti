@@ -95,65 +95,65 @@ angular
                 var gridOpts={
                     columnDefs:[
                         {
-                            name:"EDITAR",
-                            width:"1%",
+                            name:"Editar",
+                            width:"7%",
                             cellTemplate:editCellTemplate,
                             enableSorting:false
                         },
                         {
-                            name:"BORRAR",
-                            width:"1%",
+                            name:"Borrar",
+                            width:"7%",
                             cellTemplate:deleteCellTemplate,
                             enableSorting:false
                         },
                         {
                             field:"txNmbrProy",
-                            name:"Proyecto",
+                            name:"Poyecto",
+                            type:"string",
+                            width:"35%"
+                        },
+                        {
+                            field:"txNmbrProyCrto",
+                            name:"Nombre corto",
                             type:"string",
                             width:"25%"
                         },
                         {
-                            field:"txNmbrProyCrto",
-                            name:"Nombre Corto",
-                            type:"string",
-                            width:"20%"
-                        },
-                        {
                             field:"txAreaResponsable",
-                            name:"Area Responsable",
+                            name:"Área responsable",
                             type:"string",
                             width:"25%"
                         },
                         {
                             field:"txSubidreccionResponsable",
-                            name:"Subdireccion Responsable",
+                            name:"Subdirección responsable",
                             type:"string",
-                            width:"25%"
+                            width:"30%"
                         },
                         {
                             field:"txFolioCii",
-                            name:"FOLIO CII",
+                            name:"Folio CII",
                             type:"string",
-                            width:"10%"
+                            width:"17%"
                         },
                         {
                             field:"txFolioJira",
-                            name:"FOLIO JIRA",
+                            name:"Folio JIRA",
                             type:"string",
-                            width:"10%"
+                            width:"17%"
                         },
 
                         {
                             field:"fhInicio",
-                            name:"FECHA INICIO",
+                            name:"Fecha inicio",
                             type:"string",
-                            width:"25%"
+                            width:"15%"
                         },
                         {
                             field:"fhFin",
-                            name:"FECHA FIN",
+                            name:"Fecha fin",
                             type:"string",
-                            width:"25%"
+                            width:"15%"
                         },
                     ]
                 };

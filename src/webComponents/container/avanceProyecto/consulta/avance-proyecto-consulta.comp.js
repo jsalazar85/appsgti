@@ -99,35 +99,47 @@ angular
                             field:"txNmbrProy",
                             name:"Proyecto",
                             type:"string",
-                            width:"25%"
+                            width:"50%"
                         },
                         {
                             field:"txNmbrProyCrto",
                             name:"Nombre Corto",
                             type:"string",
-                            width:"15%"
+                            width:"20%"
+                        },
+                        {
+                            field:"txAreaResponsable",
+                            name:"Área responsable",
+                            type:"string",
+                            width:"40%"
+                        },
+                        {
+                            field:"txAreaSolicitante",
+                            name:"Área solicitante",
+                            type:"string",
+                            width:"40%"
                         },
                         {
                             field:"prReal",
                             name:"Avance Real",
                             type:"number",
-                            width:"10%"
+                            width:"12%"
                         },
                         {
                             field:"prSigCorte",
                             name:"Avance Sig. Corte",
                             type:"number",
-                            width:"10%"
+                            width:"15%"
                         },
                         {
                             field:"fhReporte",
                             name:"Ultimo Reporte",
                             type:"string",
-                            width:"10%"
+                            width:"13%"
                         },
                         {
-                            name:"EDITAR",
-                            width:"5%",
+                            name:"Editar",
+                            width:"9%",
                             cellTemplate:editCellTemplate,
                             enableSorting:false
                         },
@@ -140,6 +152,36 @@ angular
                 return gridOpts;
             };
             //</editor-fold> ////////////////////
+
+            //<editor-fold desc="COMBOS AREAS"> ///////////////
+            ctrl.onChangeSubdirSolicitante=function () {
+                console.log(ctrl.vm.selSubdirSolicitante);
+
+                ctrl.vm.selAreaSolicitante=null;
+
+                var tmpArr=[];
+                for(var i in ctrl.vm.lstArea){
+                    if(ctrl.vm.lstArea[i].idSubdireccion == ctrl.vm.selSubdirSolicitante.idSubdireccion){
+                        tmpArr.push(ctrl.vm.lstArea[i]);
+                    }
+                }
+                ctrl.vm.lstAreaSolicitante=tmpArr;
+            };
+
+            ctrl.onChangeSubdirResponsable=function () {
+                console.log(ctrl.vm.lstAreaResponsable);
+
+                ctrl.vm.selAreaResponsable=null;
+
+                var tmpArr=[];
+                for(var i in ctrl.vm.lstArea){
+                    if(ctrl.vm.lstArea[i].idSubdireccion == ctrl.vm.selSubdirResponsable.idSubdireccion){
+                        tmpArr.push(ctrl.vm.lstArea[i]);
+                    }
+                }
+                ctrl.vm.lstAreaResponsable=tmpArr;
+            };
+            //</editor-fold>
 
             ctrl.$onInit=function () {
                 ctrl.initModel();

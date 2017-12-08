@@ -36,6 +36,11 @@
         bottom: 7px;
         opacity: 1; }
 
+    .paddtop{
+        padding-top: 60px
+    }
+
+
 </style>
 <!--<div layout="column" layout-fill>-->
 <form name="catUsuariosDetalleForm" novalidate ng-submit="$ctrl.clickGuardar()" layout="column" layout-fill>
@@ -59,8 +64,8 @@
                 <span>DATOS DEL PROYECTO</span>
             </div>
         </md-toolbar>
-
-        <md-input-container class="md-block" flex-gt-sm >
+        <br>
+        <md-input-container class="md-block " flex-gt-sm >
             <label>NOMBRE DEL PROYECTO</label>
             <input ng-model="$ctrl.vm.m.p.txNmbrProy" ng-required="true" ng-disabled="true">
         </md-input-container>
@@ -76,7 +81,7 @@
                 <span>REPORTE DE AVANCE</span>
             </div>
         </md-toolbar>
-
+        <br>
         <md-input-container class="md-block" flex-gt-sm>
             <label>FECHA DE CORTE</label>
             <md-datepicker ng-model="$ctrl.vm.m.av.fhReporte" md-min-date="$ctrl.vm.m.av.fhReporteAnt" required></md-datepicker>
@@ -89,12 +94,12 @@
 
         <md-input-container class="md-block" flex-gt-sm >
             <label>AVANCE REAL</label>
-            <input ng-model="$ctrl.vm.m.av.prReal" ng-required="true">
+            <input ng-model="$ctrl.vm.m.av.prReal" ng-required="true" type="number" min="0" max="100">
         </md-input-container>
 
         <md-input-container class="md-block" flex-gt-sm >
             <label>AVANCE SIGUIENTE CORTE</label>
-            <input ng-model="$ctrl.vm.m.av.prSigCorte" ng-required="true">
+            <input ng-model="$ctrl.vm.m.av.prSigCorte" ng-required="true" type="number" min="0" max="100">
         </md-input-container>
 
         <md-input-container class="md-block" flex-gt-sm >

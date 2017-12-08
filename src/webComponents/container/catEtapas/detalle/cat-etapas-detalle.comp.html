@@ -60,7 +60,7 @@
 
         <md-input-container class="md-block" flex-gt-sm>
             <label>SECUENCIA</label>
-            <input ng-model="$ctrl.vm.etapa.nuSecuencia" ng-pattern="/^\d+$/" ng-required="true">
+            <input ng-model="$ctrl.vm.etapa.nuSecuencia" ng-pattern="/^\d+$/" ng-required="true" type="number" min="0">
             <div class="hint" ng-show="true">Valores numéricos enteros (#)</div>
         </md-input-container>
     </md-content>

@@ -46,31 +46,31 @@ angular
                             field:"etapa.txEtapa",
                             name:"Etapa",
                             type:"string",
-                            width:"49%"
+                            width:"50%"
                         },
                         {
                             field:"fhInicio",
                             name:"Fecha Inicio",
                             type:"date",
-                            width:"24%",
+                            width:"15%",
                             cellFilter:"date:'yyyy-MM-dd'"
                         },
                         {
                             field:"fhFin",
                             name:"Fecha Fin",
                             type:"date",
-                            width:"24%",
+                            width:"15%",
                             cellFilter:"date:'yyyy-MM-dd'"
                         },
                         {
-                            name:"EDITAR",
-                            width:"5%",
+                            name:"Editar",
+                            width:"7%",
                             cellTemplate:editCellTemplate,
                             enableSorting:false
                         },
                         {
-                            name:"BORRAR",
-                            width:"5%",
+                            name:"Borrar",
+                            width:"9%",
                             cellTemplate:deleteCellTemplate,
                             enableSorting:false
                         },
@@ -94,37 +94,37 @@ angular
                     columnDefs:[
                         {
                             field:"txNombreCompleto",
-                            name:"NOMBRE COMPLETO",
+                            name:"Nombre Completo",
                             type:"string",
-                            width:"49%"
+                            width:"40%"
                         },
                         {
                             field:"txInvlTipo",
-                            name:"TIPO INVOLUCRADO",
+                            name:"Tipo Involucrado",
                             type:"string",
-                            width:"24%",
+                            width:"20%",
                         },
                         {
                             field:"bnReporta",
-                            name:"REPORTA",
+                            name:"Reporta",
                             type:"number",
                             width:"10%",
                         },
                         {
                             field:"bnAprueba",
-                            name:"APRUEBA",
+                            name:"Aprueba",
                             type:"number",
                             width:"10%",
                         },
                         {
-                            name:"EDITAR",
-                            width:"5%",
+                            name:"Editar",
+                            width:"7%",
                             cellTemplate:editCellTemplate,
                             enableSorting:false
                         },
                         {
-                            name:"BORRAR",
-                            width:"5%",
+                            name:"Borrar",
+                            width:"9%",
                             cellTemplate:deleteCellTemplate,
                             enableSorting:false
                         },

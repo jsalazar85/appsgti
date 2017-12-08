@@ -100,31 +100,31 @@ angular
                     columnDefs:[
                         {
                             field:"txInvlTipo",
-                            name:"TIPO INVOLUCRADO",
+                            name:"Tipo involucrado",
                             type:"string",
                             width:"25%"
                         },
                         {
                             field:"txInvlTipoDscr",
-                            name:"DESCRIPCION",
+                            name:"Descripción",
                             type:"string",
-                            width:"25%"
+                            width:"40%"
                         },
                         {
                             field:"nuOrden",
-                            name:"ORDEN",
+                            name:"Orden",
                             type:"number",
-                            width:"25%"
+                            width:"10%"
                         },
                         {
-                            name:"EDITAR",
-                            width:"5%",
+                            name:"Editar",
+                            width:"7%",
                             cellTemplate:editCellTemplate,
                             enableSorting:false
                         },
                         {
-                            name:"BORRAR",
-                            width:"5%",
+                            name:"Borrar",
+                            width:"9%",
                             cellTemplate:deleteCellTemplate,
                             enableSorting:false
                         },

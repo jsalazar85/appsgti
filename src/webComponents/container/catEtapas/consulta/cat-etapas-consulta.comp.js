@@ -101,26 +101,26 @@ angular
                     columnDefs:[
                         {
                             field:"txEtapa",
-                            name:"ETAPA",
+                            name:"Etapa",
                             type:"string",
-                            width:"60%"
+                            width:"40%"
                         },
                         {
                             field:"nuSecuencia",
-                            name:"SECUENCIA",
+                            name:"Secuencia",
                             type:"number",
-                            width:"30%",
+                            width:"20%",
                             //cellFilter:"date:'yyyy-MM-dd'"
                         },
                         {
-                            name:"EDITAR",
-                            width:"5%",
+                            name:"Editar",
+                            width:"8%",
                             cellTemplate:editCellTemplate,
                             enableSorting:false
                         },
                         {
-                            name:"BORRAR",
-                            width:"5%",
+                            name:"Borrar",
+                            width:"9%",
                             cellTemplate:deleteCellTemplate,
                             enableSorting:false
                         },
