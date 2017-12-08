@@ -9,7 +9,8 @@ angular
         'isService',
         'catAreasSrvc',
         'catSubdireccionSrvc',
-        function ($rootScope,gc,cds,es,cbs,iss, catAreasSrvc,catSubdireccionSrvc){
+        'appSecService',
+        function ($rootScope,gc,cds,es,cbs,iss, catAreasSrvc,catSubdireccionSrvc,appSecService){
             var srvc=this;
 
             //<editor-fold desc="FUNCIONES DE OBTENCION DE DATOS"> ///////////////
@@ -62,6 +63,25 @@ angular
                         idTab: 8001,
                         idGra: 12,
                         idQry: 1,
+                        lstObConditions: [
+                            {
+                                txCol:"ID_LOGIN",
+                                txAlias:"logins",
+                                varValue:appSecService.usr.idLogin,
+                                txValueType:"NUMERO",
+                                txLogicOperator:"AND",
+                                txCompOperator:"="
+                            },
+                            {
+                                txCol:"BN_APLICA",
+                                txAlias:"subdirLogin",
+                                varValue:1,
+                                txValueType:"NUMERO",
+                                txLogicOperator:"AND",
+                                txCompOperator:"="
+                            }
+
+                        ]
                     },
                     success: function (response) {
                         console.log("8001,12,1: success");
