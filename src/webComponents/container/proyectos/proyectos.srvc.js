@@ -299,6 +299,25 @@ angular
                     idTab:8001,
                     idGra:8,
                     idQry:1,
+                    lstObConditions:[
+                        {
+                            txCol:"ID_LOGIN",
+                            txAlias:"logins",
+                            varValue:20171207223819,
+                            txValueType:"NUMERO",
+                            txLogicOperator:"AND",
+                            txCompOperator:"="
+                        },
+                        {
+                            txCol:"BN_APLICA",
+                            txAlias:"subdirLogin",
+                            varValue:1,
+                            txValueType:"NUMERO",
+                            txLogicOperator:"AND",
+                            txCompOperator:"="
+                        }
+                    ]
+
                 };
 
                 cbs.getAllDataById(peticion,srvc.e.getProyectos);

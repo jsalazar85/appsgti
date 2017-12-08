@@ -9,6 +9,7 @@ angular
             var ctrl=this;
 
             ctrl.loadingIndicatorTask;
+            ctrl.txLink="Tablero SGTI";
 
             ctrl.toggleList=function () {
                 $mdSidenav('left').toggle();
@@ -41,6 +42,10 @@ angular
                     appSecService.logout();
                     $rootScope.$emit("logout");
                 }
+            };
+
+            ctrl.sendLink=function () {
+                window.location='http://10.80.0.24:8020/TableroSacsyr/TabSGTI/#/';
             };
 
             $rootScope.$on('onHttpActivity', function (event,data){
