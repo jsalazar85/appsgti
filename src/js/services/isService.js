@@ -40,6 +40,22 @@ angular
                 return response;
             };
 
+            //Convierte una cadena de tipo 2017-12-08 con el sig formato:
+            //"2017-12-08 00:00:00.0000000"
+            //Convierte a date solo tomando anio, mes y dia
+            ctrl.toDateFromStr1Date=function (tx) {
+                var response=null;
+
+                if(!ctrl.isEmptyStr(tx)){
+                    var tmpArray2=tx.split("-");
+                    response=new Date(tmpArray2[0],tmpArray2[1]-1,tmpArray2[2],0,0,0,0,0);
+                }
+
+                console.log(response);
+
+                return response;
+            };
+
             ctrl.toDateTimeFromStr1=function (tx) {
                 console.log("isService.toDateTimeFromStr1 ini");
                 var response=null;
