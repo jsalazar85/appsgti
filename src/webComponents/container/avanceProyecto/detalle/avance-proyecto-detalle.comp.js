@@ -51,20 +51,19 @@ angular
 
 
                 if(!_.isNil(ob.fhReporte)){
-                    ctrl.vm.m.av.fhReporteAnt=iss.toDateFromStr1(ob.fhReporte);
+                    ctrl.vm.m.av.fhReporteAnt=iss.toDateFromStr1Date(ob.fhReporte);
                     ctrl.vm.m.av.fhReporteAnt.setDate(ctrl.vm.m.av.fhReporteAnt.getDate()+1);
                 }
 
 
                 if(!_.isNil(ob.prSigCorte)){
-                    ctrl.vm.m.av.prComprometido=ob.prSigCorte;
+                    ctrl.vm.m.av.prComprometido=ob.prSigCorte==null?0:parseInt(ob.prSigCorte.replace("%",""));
                 }else{
                     ctrl.vm.m.av.prComprometido=0;
                 }
-                ctrl.vm.m.av.fhReporte=ob.fhReporte;
+                ctrl.vm.m.av.fhReporte=iss.toDateFromStr1Date(ob.fhReporte);
                 ctrl.vm.m.av.prReal=ob.prReal==null?0:parseInt(ob.prReal.replace("%",""));
                 ctrl.vm.m.av.prSigCorte=ob.prSigCorte==null?0:parseInt(ob.prSigCorte.replace("%",""));
-                console.log(ctrl.vm.m.av.prSigCorte);
                 ctrl.vm.m.av.txAccnSemana=ob.txAccnSemana;
                 ctrl.vm.m.av.txAccnSiguiente=ob.txAccnSiguiente;
                 ctrl.vm.m.av.txAccnRiesgos=ob.txAccnRiesgos;
